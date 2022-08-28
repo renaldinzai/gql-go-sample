@@ -10,6 +10,7 @@ import (
 	"github.com/go-chi/chi"
 	"github.com/renaldinzai/gql-go-sample/graph"
 	"github.com/renaldinzai/gql-go-sample/graph/generated"
+	"github.com/renaldinzai/gql-go-sample/internal/auth"
 	database "github.com/renaldinzai/gql-go-sample/internal/pkg/db/mysql"
 )
 
@@ -22,6 +23,8 @@ func main() {
 	}
 
 	router := chi.NewRouter()
+
+	router.Use(auth.Middleware())
 
 	database.InitDB()
 	defer database.CloseDB()
